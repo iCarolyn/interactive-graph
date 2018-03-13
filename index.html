@@ -1,0 +1,451 @@
+<html>
+<head>
+<meta charset ="utf-8">
+<title>Better Life Index Infographic by Carolyn Rojsutivat</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Palanquin+Dark|Roboto" rel="stylesheet">
+
+<!-- // BETTER LIFE INDEX INFOGRAPHIC
+    // created by Carolyn Rojsutivat
+    // DePaul University - HCI 512 (Winter 2018)
+    // crojsuti@mail.depaul.edu -->
+
+<style>
+
+body {
+  width:850px;
+  font-size: 10px;
+  padding:25px;
+  color:#555;
+  font-family: 'Roboto', sans-serif;
+  background: radial-gradient(#fff, #a4bae3);
+
+}
+select {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+select:focus {
+  outline:0;
+}
+
+img {
+    width: 30%;
+    height: 30%;
+    float: left;
+}
+
+.introduction {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+p {
+    font-size: 14px;
+}
+
+.formText {
+    font-size:10px;
+}
+
+.filtersChart {
+    margin-left:30px;
+    line-height:12px;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+/* unvisited link */
+a:link {
+    color: #894e81;
+}
+
+/* visited link */
+a:visited {
+    color: #894e81;
+}
+
+/* mouse over link */
+a:hover {
+    color: #707070;
+}
+
+/* selected link */
+a:active {
+    color: #894e81;
+}
+
+h1 {
+    font-weight: bolder;
+    font-size: 62px;
+    font-family: 'Palanquin Dark', sans-serif;
+    line-height: 28px;
+    margin-top:30px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 16px;
+    padding:10px;
+    margin-top:20px;
+}
+
+#myCheckbox {
+  position:relative;
+  top:3px;
+}
+
+/* --- Chart Css --- */
+path.barEnter {
+  fill:  #66a2c9;
+  stroke-width: 1.5px;
+}
+.barEnter:hover {
+  opacity: 1;
+  fill: #707070;
+}
+
+.axis--x path {
+  display: none;
+}
+
+.grid--y path,
+.grid--y text {
+  display: none;
+}
+.grid--y line {
+  opacity:.15;
+}
+
+path {
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.toolTip {
+  pointer-events: none;
+	position: absolute;
+  display: none;
+  min-width: 50px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  padding: 9px 14px 6px 14px;
+  border-radius: 2px;
+  text-align: left;
+  line-height: 1.3;
+  color: #e87243;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, .15);
+  
+}
+
+.toolTip:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid white;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -12px;
+}  
+.toolTip span {
+    font-weight: 500;
+  color: #081F2C;
+  font-family: sans-serif;
+}
+
+</style>
+
+</head>
+
+<body>
+<img src="oecd-logo1.svg">
+<h1>Better Life Index</h1>
+<p class="introduction">How's life? There is more to life than the cold numbers of GDP and economic statistics - This Index allows you to compare well-being across countries, based on topics the OECD has identified as essential, in the areas of material living conditions and quality of life.</p>
+<!-- Selection Category -->
+<span class="filtersChart">
+Choose Category
+
+<select id="category">
+  <option value=" 1">Self-reported health (%)</option>
+  <option value=" 2">Life satisfaction (avg)</option>
+  <option value=" 3">Leisure time (hrs)</option>
+  <option value=" 4">Feeling safe at night (%)</option>
+  <option value=" 5">Water quality (%)</option>
+</select> 
+</span>
+
+<!-- Selection New dataset -->
+<span class="filtersChart">
+Choose Year
+  
+  <select class="select-style" id="year">
+    <option value="2017">2017</option>
+    <option value="2016">2016</option>
+  </select>
+</span>
+
+<!-- Sort dimension -->
+<span class="filtersChart">Sort Values
+    <input type="checkbox" id="myCheckbox">
+  </span>
+  
+<!-- Chart -->
+<div id="chart"></div>
+
+<!-- About the measures -->
+
+<h2>What do the measures mean?</h2>
+
+<div style="height:150px;margin:20px;">
+<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-medkit fa-5x"></i>
+<h3>Self-reported Health</h3>
+</div>
+<p>Most OECD countries conduct regular health surveys which allow respondents to report on different aspects of their health. The commonly-asked question, "How is your health?" is one way of collecting data on self-perceived health status. Despite the subjective nature of this question, the answers received have been found to be a good predictor of people's future health care use. Across the OECD, about 69% of the adult population say their health is "good" or "very good". In Canada and New Zealand, 88% of adults report being in good health; while in Japan and Korea less than 40% of people rate their health as "good" or "very good". Cultural and framing factors may affect responses to this broad question on health status.</p>
+</div>
+
+<div style="height:150px;margin:20px;">
+<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fab fa-gratipay fa-5x"></i>
+<h3>Life Satisfaction</h3>
+</div>
+<p>Life satisfaction measures how people evaluate their life as a whole rather than their current feelings. When asked to rate their general satisfaction with life on a scale from 0 to 10, people on average across the OECD gave it a 6.5. Life satisfaction is not evenly shared across the OECD however. Some countries – Greece, Hungary, Portugal and Turkey – have a relatively low level of overall life satisfaction, with average scores of 5.5 or less. At the other end of the scale, scores reach 7.5 in Denmark, Finland, Iceland, Norway and Switzerland. </p>
+</div>
+
+<div style="height:150px;margin:20px;">
+<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-balance-scale fa-5x"></i>
+<h3>Time devoted to leisure and personal care</h3>
+</div>
+<p>The more people work, the less time they have to spend on other activities, such as personal care or leisure. The amount and quality of leisure time is important for people's overall well-being, and can bring additional physical and mental health benefits. A full-time worker in the OECD devotes 62% of the day on average, or close to 15 hours, to personal care (eating, sleeping, etc.) and leisure (socialising with friends and family, hobbies, games, computer and television use, etc.). Fewer hours in paid work for women do not necessarily result in greater leisure time, as time devoted to leisure is roughly the same for men and women across the 20 OECD countries studied.</p>
+</div>
+
+<div style="height:150px;margin:20px;">
+<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-street-view fa-5x"></i>
+<h3>Feeling safe walking alone at night</h3>
+</div>
+<p>According to recent data, about 69% of people in OECD countries say they feel safe walking alone at night. There are major differences, however, between countries. While 85% or more of people in Denmark, Finland, Norway and Switzerland say they feel safe. The level in Mexico is just below 50%, and just below 40% in Brazil and South Africa. Latvia is closer to the OECD average with 61%%.</p>
+</div>
+
+<div style="height:150px;margin:20px;">
+    <div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-tint fa-5x"></i>
+    <h3>Water Quality</h3>
+    </div>
+    <p>Access to clean water is fundamental to human well-being. Managing water to meet that need is a major – and growing – challenge in many parts of the world. Many people are suffering from inadequate quantity and quality of water. Despite significant progress in OECD countries in reducing water pollution, from fixed sources such as industrial and municipal wastewater treatment plants, diffuse pollution from agriculture and urban run-offs remains a challenge, and improvements in freshwater quality are not always easy to discern. On average, almost 81% of people in OECD countries say they are satisfied with water quality.</p>
+    </div>
+<p>To download the full data, please visit <a href="http://www.oecdbetterlifeindex.org/" target="_blank">OECD Better Life Index</a>.</p>
+<!-- Graph chart starts here  -->
+
+<script>
+
+let formatValue = d3.format(",%");
+
+let margin = {top: 50, right: 145, bottom: 120, left: 45},
+    width = 1200 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+let xAxis = d3.axisBottom(x),
+    yAxis = d3.axisLeft(y),
+    yGrid = d3.axisLeft(y).tickSize(-width);
+
+let g = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+    
+let sideTextX = width + 30,
+    sideTextY = -height + height;
+  
+var durations = 0;
+
+var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+  
+function afterLoad() {
+    durations = 750;
+};
+  
+g.append("g")
+    .attr("class", "axis axis--x")
+    .attr("transform", "translate(0," + height + ")");
+
+g.append("g")
+    .attr("class", "axis axis--y");
+    
+g.append("g")
+    .attr("class", "axis grid--y");
+
+function type(d) { return d; }    
+
+d3.queue()
+    .defer(d3.csv, "data1.csv", type)
+    .defer(d3.csv, "data2.csv", type)
+    .await(ready);
+
+function ready(error, data1, data2) {
+
+  if (error) throw error;
+  
+  var data, INT, sortIndex;
+
+  // Event handlers
+  d3.select("#myCheckbox").on('change', update);
+  d3.select("#category").on('change', update);
+  d3.select("#year").on('change', function() {
+    data = d3.select('#year').property('value') == '2017' ? data1 : data2;
+    sortIndex = data.map( function(d) { return d.country} );
+    update();
+  });
+     
+  init();     
+  update();
+  
+  function init() {
+    data = d3.select('#year').property('value') == '2017' ? data1 : data2; 
+    sortIndex = data.map( function(d) { return d.country} );
+  } 
+  
+  function update() {
+    
+    INT = d3.select('#category').property('value');
+  
+    // Update domain
+    y.domain([0, d3.max(data, function(d) {
+        return d["Category" + INT]; })
+    ]).nice();
+    
+    // Update axis
+    g.selectAll(".axis.axis--y").transition()
+      .duration(durations)
+      .call(yAxis);
+    g.selectAll(".axis.grid--y").transition()
+      .duration(durations)
+      .call(yGrid);
+    
+    //sort data
+    data.sort( d3.select("#myCheckbox").property("checked")
+      ? function(a, b) { return b["Category" + INT] - a["Category" + INT]; }
+      : function(a, b) { return sortIndex.indexOf(a.country) - sortIndex.indexOf(b.country);}).slice();
+      
+    // set x domain
+    x.domain(data.map(function(d) { return d.country; }));
+    
+    g.selectAll(".axis.axis--x").transition()
+      .duration(durations)
+      .call(xAxis)
+      .selectAll("text")
+    .attr("y", 0)
+    .attr("x", 9)
+    .attr("dy", ".35em")
+    .attr("transform", "rotate(90)")
+    .style("text-anchor", "start");;
+      
+    // Update rectangles
+    let bars = g.selectAll(".barEnter")
+      .data(data, function(d) {
+        return d.country;
+      });
+      
+    bars = bars
+      .enter()
+      .append("path") // Appending path rather than rect
+      .attr("class", "barEnter")
+      .merge(bars)
+      .on("mousemove", function(d){
+            tooltip
+              .style("left", d3.event.pageX - 75 + "px")
+              .style("top", d3.event.pageY - 130 + "px")
+              .style("display", "inline-block")
+              .html((d.country) + "<br><span>" + "Health: " + (d["Category 1"]) + "% </span>" + "<br><span>" + "Life Satisfaction: " + (d["Category 2"]) + "</span>" + "<br><span>" + "Leisure Time: " + (d["Category 3"]) + " hrs</span>" + "<br><span>" + "Safety: " + (d["Category 4"]) + "%</span>" + "<br><span>" + "Water Quality: " + (d["Category 5"]) + "%</span>");
+        })
+    		.on("mouseout", function(d){ tooltip.style("display", "none" );})
+            d3.select("path.barEnter:nth-child(29)").style("fill","#894e81");
+    
+    bars.transition()
+      .duration(durations)
+      .attr("d", function(d) { 
+        return roundedRect(
+          x(d.country),                       // x position
+          y(d["Category" + INT]),           // y position
+          x.bandwidth(),                    // width
+          height - y(d["Category" + INT]),  // height
+          5                                 // radius
+        ) 
+      });
+    
+    bars.exit().remove();
+    
+    // Update text on rectangles
+    let textUpdate = g.selectAll(".textEnter")
+      .data(data, function(d) {
+        return d.country;
+      });
+      
+    textUpdate = textUpdate.enter()
+      .append("text")
+      .style("text-shadow","1px 1px #777")
+      .attr("class", "textEnter") 
+      .attr("text-anchor","middle")
+      .attr("font-size",11)
+      .attr("fill","#fff")
+      .merge(textUpdate);
+    
+    textUpdate.transition()
+      .duration(durations)
+      .attr("y", function(d) { 
+        return y(d["Category" + INT]) + 15; 
+        })
+      .attr("x", function(d) { 
+        return x(d.country) + x.bandwidth()/2; 
+      })
+      // Update text value
+      .text( function(d) { 
+        return d["Category" + INT]; 
+      })
+
+  } // End of update
+
+// text label for the x axis
+g.append("text")             
+  .attr("transform",
+        "translate(" + (width/2) + " ," + 
+                       (height + margin.top + 80) + ")")
+  .style("text-anchor", "middle")
+  .text("Countries");
+
+  function roundedRect(x, y, width, height, radius) {
+    return "M" + (x + radius) + "," + y + "h" + (width - 2*radius) + 
+           "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius + 
+           "v" + (height - 2*radius) + 
+           "v" + radius + 
+           "h" + -radius + 
+           "h" + (2*radius - width) + 
+           "h" + -radius + 
+           "v" + -radius + 
+           "v" + (2*radius - height) + 
+           "a" + radius + "," + radius + " 0 0 1 " + radius + "," + -radius + "z";
+  };
+
+  afterLoad()
+
+} // End of ready
+
+
+</script>
+
+</body>
+</html> 
