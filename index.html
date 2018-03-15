@@ -4,21 +4,23 @@
 <title>Better Life Index Infographic by Carolyn Rojsutivat</title>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Palanquin+Dark|Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Alegreya:900i|Montserrat" rel="stylesheet">
 
 <!-- // BETTER LIFE INDEX INFOGRAPHIC
     // created by Carolyn Rojsutivat
     // DePaul University - HCI 512 (Winter 2018)
-    // crojsuti@mail.depaul.edu -->
+    // crojsuti@mail.depaul.edu 
+    // live link: https://icarolyn.github.io/interactive-graph/
+-->
 
 <style>
 
 body {
-  width:850px;
+  margin:auto;
   font-size: 10px;
   padding:25px;
   color:#555;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: radial-gradient(#fff, #a4bae3);
 
 }
@@ -31,19 +33,47 @@ select:focus {
   outline:0;
 }
 
-img {
-    width: 30%;
-    height: 30%;
-    float: left;
+p {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 68px;
+    font-family: 'Alegreya', serif;
+    line-height: 28px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+h2 {
+    font-size: 30px;
+    margin-left:50px;
+    font-family: 'Alegreya', serif;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 16px;
+    padding:10px;
+    margin-top:20px;
+}
+
+.addMargin {
+  margin-left: 50px;
+}
+
+.container {
+    width: 1100px;
+    margin:auto;
 }
 
 .introduction {
     font-size: 18px;
     line-height: 22px;
-}
-
-p {
-    font-size: 14px;
+    margin-left: 50px;
 }
 
 .formText {
@@ -51,21 +81,23 @@ p {
 }
 
 .filtersChart {
-    margin-left:30px;
+    margin-left:50px;
     line-height:12px;
     font-size: 12px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
 }
 
 /* unvisited link */
 a:link {
     color: #894e81;
+    font-weight: bold;
 }
 
 /* visited link */
 a:visited {
     color: #894e81;
+    font-weight: bold;
 }
 
 /* mouse over link */
@@ -76,25 +108,7 @@ a:hover {
 /* selected link */
 a:active {
     color: #894e81;
-}
-
-h1 {
-    font-weight: bolder;
-    font-size: 62px;
-    font-family: 'Palanquin Dark', sans-serif;
-    line-height: 28px;
-    margin-top:30px;
-}
-
-h2 {
-    font-size: 24px;
-}
-
-h3 {
     font-weight: bold;
-    font-size: 16px;
-    padding:10px;
-    margin-top:20px;
 }
 
 #myCheckbox {
@@ -172,13 +186,12 @@ path {
 </head>
 
 <body>
-<img src="oecd-logo1.svg">
+<div class="container">
 <h1>Better Life Index</h1>
-<p class="introduction">How's life? There is more to life than the cold numbers of GDP and economic statistics - This Index allows you to compare well-being across countries, based on topics the OECD has identified as essential, in the areas of material living conditions and quality of life.</p>
+<p class="introduction">How's life? There is more to life than the cold numbers of GDP and economic statistics - This Index allows you to compare well-being across countries, based on topics the Organisation for Economic Co-operation and Development (OECD) has identified as essential, in the areas of material living conditions and quality of life.</p>
 <!-- Selection Category -->
 <span class="filtersChart">
 Choose Category
-
 <select id="category">
   <option value=" 1">Self-reported health (%)</option>
   <option value=" 2">Life satisfaction (avg)</option>
@@ -191,7 +204,6 @@ Choose Category
 <!-- Selection New dataset -->
 <span class="filtersChart">
 Choose Year
-  
   <select class="select-style" id="year">
     <option value="2017">2017</option>
     <option value="2016">2016</option>
@@ -206,54 +218,63 @@ Choose Year
 <!-- Chart -->
 <div id="chart"></div>
 
+
 <!-- About the measures -->
-
 <h2>What do the measures mean?</h2>
-
-<div style="height:150px;margin:20px;">
-<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-medkit fa-5x"></i>
+<div style="width:800px;">
+<div style="height:200px;">
+<div style="float:left;width:20%;text-align:center;color:#894e81;margin-top:35px;"><i class="fas fa-medkit fa-5x"></i>
 <h3>Self-reported Health</h3>
 </div>
-<p>Most OECD countries conduct regular health surveys which allow respondents to report on different aspects of their health. The commonly-asked question, "How is your health?" is one way of collecting data on self-perceived health status. Despite the subjective nature of this question, the answers received have been found to be a good predictor of people's future health care use. Across the OECD, about 69% of the adult population say their health is "good" or "very good". In Canada and New Zealand, 88% of adults report being in good health; while in Japan and Korea less than 40% of people rate their health as "good" or "very good". Cultural and framing factors may affect responses to this broad question on health status.</p>
+<p style="float:right;width:75%;">Most OECD countries conduct regular health surveys which allow respondents to report on different aspects of their health. The commonly-asked question, "How is your health?" is one way of collecting data on self-perceived health status. Despite the subjective nature of this question, the answers received have been found to be a good predictor of people's future health care use. Across the OECD, about 69% of the adult population say their health is "good" or "very good". In Canada and New Zealand, 88% of adults report being in good health; while in Japan and Korea less than 40% of people rate their health as "good" or "very good". Cultural and framing factors may affect responses to this broad question on health status.</p>
 </div>
 
-<div style="height:150px;margin:20px;">
-<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fab fa-gratipay fa-5x"></i>
+<div style="height:180px">
+<div style="float:left;width:20%;text-align:center;color:#894e81;margin-top:25px;"><i class="fab fa-gratipay fa-5x"></i>
 <h3>Life Satisfaction</h3>
 </div>
-<p>Life satisfaction measures how people evaluate their life as a whole rather than their current feelings. When asked to rate their general satisfaction with life on a scale from 0 to 10, people on average across the OECD gave it a 6.5. Life satisfaction is not evenly shared across the OECD however. Some countries – Greece, Hungary, Portugal and Turkey – have a relatively low level of overall life satisfaction, with average scores of 5.5 or less. At the other end of the scale, scores reach 7.5 in Denmark, Finland, Iceland, Norway and Switzerland. </p>
+<p style="float:right;width:75%;">Life satisfaction measures how people evaluate their life as a whole rather than their current feelings. When asked to rate their general satisfaction with life on a scale from 0 to 10, people on average across the OECD gave it a 6.5. Life satisfaction is not evenly shared across the OECD however. Some countries – Greece, Hungary, Portugal and Turkey – have a relatively low level of overall life satisfaction, with average scores of 5.5 or less. At the other end of the scale, scores reach 7.5 in Denmark, Finland, Iceland, Norway and Switzerland. </p>
 </div>
 
-<div style="height:150px;margin:20px;">
-<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-balance-scale fa-5x"></i>
+<div style="height:220px;">
+<div style="float:left;width:20%;text-align:center;color:#894e81;margin-top:25px;"><i class="fas fa-balance-scale fa-5x"></i>
 <h3>Time devoted to leisure and personal care</h3>
 </div>
-<p>The more people work, the less time they have to spend on other activities, such as personal care or leisure. The amount and quality of leisure time is important for people's overall well-being, and can bring additional physical and mental health benefits. A full-time worker in the OECD devotes 62% of the day on average, or close to 15 hours, to personal care (eating, sleeping, etc.) and leisure (socialising with friends and family, hobbies, games, computer and television use, etc.). Fewer hours in paid work for women do not necessarily result in greater leisure time, as time devoted to leisure is roughly the same for men and women across the 20 OECD countries studied.</p>
+<p style="float:right;width:75%;">The more people work, the less time they have to spend on other activities, such as personal care or leisure. The amount and quality of leisure time is important for people's overall well-being, and can bring additional physical and mental health benefits. A full-time worker in the OECD devotes 62% of the day on average, or close to 15 hours, to personal care (eating, sleeping, etc.) and leisure (socialising with friends and family, hobbies, games, computer and television use, etc.). Fewer hours in paid work for women do not necessarily result in greater leisure time, as time devoted to leisure is roughly the same for men and women across the 20 OECD countries studied.</p>
 </div>
 
-<div style="height:150px;margin:20px;">
-<div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-street-view fa-5x"></i>
+<div style="height:170px;">
+<div style="float:left;width:20%;text-align:center;color:#894e81;"><i class="fas fa-street-view fa-5x"></i>
 <h3>Feeling safe walking alone at night</h3>
 </div>
-<p>According to recent data, about 69% of people in OECD countries say they feel safe walking alone at night. There are major differences, however, between countries. While 85% or more of people in Denmark, Finland, Norway and Switzerland say they feel safe. The level in Mexico is just below 50%, and just below 40% in Brazil and South Africa. Latvia is closer to the OECD average with 61%%.</p>
+<p style="float:right;width:75%;">According to recent data, about 69% of people in OECD countries say they feel safe walking alone at night. There are major differences, however, between countries. While 85% or more of people in Denmark, Finland, Norway and Switzerland say they feel safe. The level in Mexico is just below 50%, and just below 40% in Brazil and South Africa. Latvia is closer to the OECD average with 61%%.</p>
 </div>
 
-<div style="height:150px;margin:20px;">
-    <div style="width:200px;text-align:center;color:#894e81;float:left;padding:10px;vertical-align: middle;"><i class="fas fa-tint fa-5x"></i>
+<div style="height:200px;">
+    <div style="float:left;width:20%;text-align:center;color:#894e81;margin-top:30px;"><i class="fas fa-tint fa-5x"></i>
     <h3>Water Quality</h3>
     </div>
-    <p>Access to clean water is fundamental to human well-being. Managing water to meet that need is a major – and growing – challenge in many parts of the world. Many people are suffering from inadequate quantity and quality of water. Despite significant progress in OECD countries in reducing water pollution, from fixed sources such as industrial and municipal wastewater treatment plants, diffuse pollution from agriculture and urban run-offs remains a challenge, and improvements in freshwater quality are not always easy to discern. On average, almost 81% of people in OECD countries say they are satisfied with water quality.</p>
+    <p style="float:right;width:75%;">Access to clean water is fundamental to human well-being. Managing water to meet that need is a major – and growing – challenge in many parts of the world. Many people are suffering from inadequate quantity and quality of water. Despite significant progress in OECD countries in reducing water pollution, from fixed sources such as industrial and municipal wastewater treatment plants, diffuse pollution from agriculture and urban run-offs remains a challenge, and improvements in freshwater quality are not always easy to discern. On average, almost 81% of people in OECD countries say they are satisfied with water quality.</p>
     </div>
-<p>To download the full data, please visit <a href="http://www.oecdbetterlifeindex.org/" target="_blank">OECD Better Life Index</a>.</p>
-<p>The live link to the interactive graph: <a href="https://icarolyn.github.io/interactive-graph" target="_blank">Better Life Index interactive graph</a>.</p>
+
+    <h2>About OECD</h2>
+    <p class="addMargin">The mission of the Organisation for Economic Co-operation and Development (OECD) is to promote policies that will improve the economic and social well-being of people around the world.</p>
+    <p class="addMargin">The OECD provides a forum in which governments can work together to share experiences and seek solutions to common problems. We work with governments to understand what drives economic, social and environmental change. We measure productivity and global flows of trade and investment. We analyse and compare data to predict future trends. We set international standards on a wide range of things, from agriculture and tax to the safety of chemicals.</p>
+  </div>
+
+<p class="addMargin">To download the full data or to learn more about OECD, please visit <a href="http://www.oecdbetterlifeindex.org/" target="_blank">OECD Better Life Index</a>.</p>
+<p class="addMargin">The live link to the interactive graph: <a href="https://icarolyn.github.io/interactive-graph" target="_blank">Better Life Index interactive graph</a>.</p>
+</div>
+
+
 <!-- Graph chart starts here  -->
 
 <script>
 
 let formatValue = d3.format(",%");
 
-let margin = {top: 50, right: 145, bottom: 120, left: 45},
-    width = 1200 - margin.left - margin.right,
+let margin = {top: 50, right: 50, bottom: 120, left: 45},
+    width = 1100 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
@@ -444,6 +465,15 @@ g.append("text")
   afterLoad()
 
 } // End of ready
+
+// show + hide
+
+$(document).ready(function(){
+    $("#toggle").click(function(){
+        $("#moreinfo").toggle(1000);
+    });
+});
+
 
 
 </script>
